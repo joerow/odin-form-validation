@@ -7,5 +7,30 @@
     <script src="script.js"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body></body>
+  <body>
+    <div id="main-container">
+      <div id="container">
+        <form action="" method="post" class="myForm">
+          <label for="userEmail">Email:</label>
+          <input
+            type="email"
+            name="userEmail"
+            id="userEmail"
+            required
+            minlength="5"
+          />
+          <span class="error" aria-live="polite"></span>
+          <label for="userCountry">Country:</label>
+          <input
+            type="s"
+            name="userCountry"
+            id="userCountry"
+            required
+            minlength="5"
+          />
+          <span class="error" aria-live="polite"></span>
+        </form>
+      </div>
+    </div>
+  </body>
 </html>
