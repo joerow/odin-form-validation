@@ -3,8 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="script.js"></script>
+    <title>Form Validation Practice</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -21,16 +20,14 @@
           />
           <span class="error" aria-live="polite"></span>
           <label for="userCountry">Country:</label>
-          <input
-            type="s"
-            name="userCountry"
-            id="userCountry"
-            required
-            minlength="5"
-          />
+          <select name="userCountry" id="userCountry" required></select>
+          <span class="error" aria-live="polite"></span>
+          <label for="userPostal">Postal code:</label>
+          <input type="text" name="userPostal" id="userPostal" required />
           <span class="error" aria-live="polite"></span>
         </form>
       </div>
     </div>
   </body>
+  <script src="script.js"></script>
 </html>
