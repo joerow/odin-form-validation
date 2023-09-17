@@ -6,7 +6,7 @@ const countries = [
   },
   {
     countryName: "United States",
-    postcodeFormat: /\d\d\d\d\d/,
+    postcodeFormat: "[0-9][0-9][0-9][0-9][0-9]",
     postcodeFormatPlain: "57044",
   },
 ];
@@ -18,6 +18,15 @@ countries.forEach((country) => {
   option.innerText = country.countryName;
   selectOptions.appendChild(option);
 });
+
+function updatePostal(e) {
+  let country = countries.find((x) => x.countryName === selectOptions.value);
+  postalInput.pattern = country.postcodeFormat;
+  console.log(country.postcodeFormat);
+}
+
+const selectDropdown = document.querySelector("select");
+selectDropdown.addEventListener("change", updatePostal);
 
 const emailInput = document.getElementById("userEmail");
 const emailError = document.querySelector("#userEmail + span.error");
@@ -38,6 +47,9 @@ emailInput.addEventListener("input", (event) => {
 
 function validateInput(type, toValidate) {
   if (type === "postal") {
+    let country = countries.find((x) => x.countryName === selectOptions.value);
+    console.log(country.postcodeFormat);
+    const postalFormat = new RegExp(country.postcodeFormat);
     if (toValidate.value.match(postalFormat)) {
       return true;
     }
@@ -50,27 +62,33 @@ function validateInput(type, toValidate) {
 function showError(error) {
   if (error == "email") {
     if (emailInput.validity.typeMismatch) {
-      // If the field is empty,
+      // If the field not a valid email type,
       // display the following error message.
       emailError.textContent = "please enter a valid email";
       emailError.className = "error active";
     }
-  }
-  if (error == "postal") {
-    if (postalInput.validity.valid) {
+    if (emailInput.validity.valueMissing) {
       // If the field is empty,
       // display the following error message.
-      postalError.textContent = "please enter a valid postal code";
+      emailError.textContent = "please enter an email";
+      emailError.className = "error active";
+    }
+  }
+  if (error == "postal") {
+    if (postalInput.validity.valueMissing) {
+      // If the field is empty,
+      // display the following error message.
+      postalError.textContent = "please input a valid postal code";
+      postalError.className = "error active";
     } else {
-      if (validateInput("postal", postalInput)) {
+      if (postalInput.validity.patternMismatch) {
         // If the field is empty,
         // display the following error message.
-        postalError.textContent = "please enter a valid post code";
+        postalError.textContent = "please enter a valid post code. E.g. 55555";
+        postalError.className = "error active";
+        // Set the styling appropriately
       }
-      // Set the styling appropriately
-      postalError.className = "error active";
     }
-    postalError.textContent = "please enter a valid post";
   }
 }
 

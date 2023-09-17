@@ -23,7 +23,13 @@
           <select name="userCountry" id="userCountry" required></select>
           <span class="error" aria-live="polite"></span>
           <label for="userPostal">Postal code:</label>
-          <input type="text" name="userPostal" id="userPostal" required />
+          <input
+            type="text"
+            name="userPostal"
+            id="userPostal"
+            required
+            minlength="3"
+          />
           <span class="error" aria-live="polite"></span>
           <label for="userPassword">Password:</label>
           <input
