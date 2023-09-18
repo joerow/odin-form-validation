@@ -93,6 +93,55 @@ function showError(error) {
       }
     }
   }
+  if (error == "password") {
+    if (passwordInput.validity.valueMissing) {
+      // If the field is empty,
+      // display the following error message.
+      passwordError.textContent = "Please input a valid password";
+      passwordError.className = "error active";
+    } else {
+      // Validate lowercase letters
+      var lowerCaseLetters = /[a-z]/g;
+      var lowerCaseError = "";
+      if (passwordInput.value.match(lowerCaseLetters)) {
+      } else {
+        lowerCaseError = "Missing lowercase" + "<br>";
+      }
+
+      // Validate capital letters
+      var upperCaseLetters = /[A-Z]/g;
+      var upperCaseError = "";
+      if (passwordInput.value.match(upperCaseLetters)) {
+      } else {
+        upperCaseError = "Missing uppercase" + "<br>";
+      }
+
+      // Validate numbers
+      var numbers = /[0-9]/g;
+      var numbersError = "";
+      if (passwordInput.value.match(numbers)) {
+      } else {
+        numbersError = "Missing number" + "<br>";
+      }
+
+      // Validate length
+      var lengthError = "";
+      if (passwordInput.value.length >= 8) {
+      } else {
+        lengthError =
+          "Password too short." +
+          "<br>" +
+          (8 - passwordInput.value.length) +
+          " more characters needed." +
+          "<br>";
+      } // If the field is empty,
+      // display the following error message.
+      passwordError.innerHTML =
+        lengthError + lowerCaseError + upperCaseError + numbersError;
+      passwordError.className = "error active";
+      // Set the styling appropriately
+    }
+  }
 }
 
 const postalInput = document.getElementById("userPostal");
@@ -109,5 +158,21 @@ postalInput.addEventListener("input", (event) => {
   } else {
     // If there is still an error, show the correct error
     showError("postal");
+  }
+});
+
+const passwordInput = document.getElementById("userPassword");
+const passwordError = document.querySelector("#userPassword + span.error");
+passwordInput.addEventListener("input", (event) => {
+  // Each time the user types something, we check if the
+  // form fields are valid.
+  if (passwordInput.validity.valid) {
+    // In case there is an error message visible, if the field
+    // is valid, we remove the error message.
+    passwordError.textContent = ""; // Reset the content of the message
+    passwordError.className = "error"; // Reset the visual state of the message
+  } else {
+    // If there is still an error, show the correct error
+    showError("password");
   }
 });
