@@ -176,3 +176,21 @@ passwordInput.addEventListener("input", (event) => {
     showError("password");
   }
 });
+
+const passwordConfirm = document.getElementById("passwordConfirmation");
+const passwordConfirmError = document.querySelector(
+  "#passwordConfirmation + span.error"
+);
+passwordConfirm.addEventListener("input", (event) => {
+  // Each time the user types something, we check if the
+  // form fields are valid.
+  if (passwordConfirm.value === passwordInput.value) {
+    // In case there is an error message visible, if the field
+    // is valid, we remove the error message.
+    passwordConfirmError.textContent = ""; // Reset the content of the message
+    passwordConfirmError.className = "error"; // Reset the visual state of the message
+  } else {
+    // If there is still an error, show the correct error
+    passwordConfirmError.textContent = "Passwords do not match";
+  }
+});
