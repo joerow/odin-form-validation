@@ -78,13 +78,12 @@ input:focus:invalid {
 /* This is the style of our error messages */
 .error {
   grid-column: controls;
-  width: 100%;
+  width: 180px;
   padding: 0;
   font-size: 80%;
   color: white;
   background-color: #900;
   border-radius: 0 0 5px 5px;
-
   box-sizing: border-box;
 }
 

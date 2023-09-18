@@ -1,7 +1,8 @@
 const countries = [
   {
     countryName: "Great Britain",
-    postcodeFormat: /[a-z]\d\d\s\d[a-z][a-z]/,
+    postcodeFormat:
+      "[A-Za-z]{1,2}[0-9Rr][0-9A-Za-z]? [0-9][ABD-HJLNP-UW-Zabd-hjlnp-uw-z]{2}",
     postcodeFormatPlain: "S43 3NF",
   },
   {
@@ -22,6 +23,7 @@ countries.forEach((country) => {
 function updatePostal(e) {
   let country = countries.find((x) => x.countryName === selectOptions.value);
   postalInput.pattern = country.postcodeFormat;
+  postalInput.dataset.example = country.postcodeFormatPlain;
   console.log(country.postcodeFormat);
 }
 
@@ -84,7 +86,8 @@ function showError(error) {
       if (postalInput.validity.patternMismatch) {
         // If the field is empty,
         // display the following error message.
-        postalError.textContent = "please enter a valid post code. E.g. 55555";
+        postalError.textContent =
+          "please enter a valid post code. E.g. " + postalInput.dataset.example;
         postalError.className = "error active";
         // Set the styling appropriately
       }
